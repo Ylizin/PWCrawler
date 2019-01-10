@@ -34,7 +34,7 @@ def main():
     totalPages = Crawler.get_dir_info()
     print(totalPages)
     
-    for i in range(92,730):
+    for i in range(totalPages):
         # one_process(i)
         p.apply_async(one_process,args=[i],error_callback = lambda e : print(repr(e)))
         
