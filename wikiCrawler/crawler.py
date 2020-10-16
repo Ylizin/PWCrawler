@@ -61,7 +61,11 @@ if __name__ == '__main__':
                     }''')
             print(p)
             await page.close()
-            words2para[word] = p
+            if p and len(p.strip().split())<20 and ('refer' in p or 'this message may be' in p):
+                words2para[word] = ""
+            else:
+                words2para[word] = p
+
         # res = await asyncio.gather(*[request_page(w) for w in words],return_exceptions=True)
 
         # 上面的写法请求得太快了，机器好像没顶住，加载不出来，不知道有没有wiki ban ip的问题
@@ -73,7 +77,7 @@ if __name__ == '__main__':
                 await request_page(word)
             except Exception as e:
                 print(e)
-                await request_page(word)
+                break
             pickle.dump(words2para,open('explan','wb'))
             await asyncio.sleep(5)
 
