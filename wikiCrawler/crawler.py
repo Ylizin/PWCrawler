@@ -9,7 +9,7 @@ class Crawler:
             self.browser = browser
 
     async def init_browser(self):
-            self.browser = await launch(args = ['--no-sandbox','--proxy-server=socks5://192.168.31.34:1081'])
+            self.browser = await launch(args = ['--no-sandbox','--proxy-server=socks5://172.22.96.1:1081'])
 
     async def make_page(self,page=None):
         if page:
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     URL_PAT ='https://en.wikipedia.org/wiki/{}'
     import pickle 
     words2para = pickle.load(open('./explan','rb'))
-    words = pickle.load(open('./tags','rb'))
+    words = pickle.load(open('./dict','rb'))
     async def test():
         c = Crawler()
         await c.init_browser()
@@ -70,14 +70,14 @@ if __name__ == '__main__':
 
         # 上面的写法请求得太快了，机器好像没顶住，加载不出来，不知道有没有wiki ban ip的问题
         # 这里直接串行了qaq
-        for word in words:
+        for word in words.values():
             if word in words2para:
                 continue
             try:
                 await request_page(word)
             except Exception as e:
                 print(e)
-                break
+                continue
             pickle.dump(words2para,open('explan','wb'))
             await asyncio.sleep(5)
 
