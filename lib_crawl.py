@@ -1,5 +1,5 @@
 
-new_id = '3F4BD63D7667A8DC0D1E1BDB45BB3B8D'
+new_id = 'F673946EB8F74C5DE64CC70004FA69DA'
 from enum import Enum
 
 class WEEK(Enum):
@@ -18,11 +18,11 @@ def order():
     import time 
     from pyppeteer import page
     from wikiCrawler.crawler import Crawler
-    if get_week_day()==WEEK.Thu:
-        return
+    # if get_week_day()==WEEK.Wed:
+        # return
 
     c = Crawler()
-    cookie = {'name':'JSESSIONID','value':'3F4BD63D7667A8DC0D1E1BDB45BB3B8D','url':'https://seat.lib.whu.edu.cn'}
+    cookie = {'name':'JSESSIONID','value':'F673946EB8F74C5DE64CC70004FA69DA','url':'https://seat.lib.whu.edu.cn'}
     
     if new_id and new_id != 'no':
         cookie['value'] = new_id
